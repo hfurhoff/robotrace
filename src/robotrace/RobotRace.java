@@ -278,6 +278,7 @@ public class RobotRace extends Base {
         Vector cross;
         if(vn.x != z.x || vn.y != z.y) cross = z.cross(vn).normalized();
         else cross = new Vector(1.0, 0, 0);
+        //
         
         gl.glPushMatrix();
             gl.glTranslated(v.x, v.y, v.z);
