@@ -95,10 +95,16 @@ class Robot {
     private void drawArm(GL2 gl, GLU glu, GLUT glut){
         gl.glScaled(armSize, armSize, armSize);
         glut.glutSolidCube(1);
+        gl.glTranslated(0, 0, -armSize);
+        gl.glColor3d(0, 0, 0);
+        glut.glutSolidCube(1);
     }
     
     private void drawLeg(GL2 gl, GLU glu, GLUT glut){
         gl.glScaled(legSize, legSize, legSize);
+        glut.glutSolidCube(1);
+        gl.glTranslated(0, 0, -legSize);
+        gl.glColor3d(0, 0, 0);
         glut.glutSolidCube(1);
     }
 }
