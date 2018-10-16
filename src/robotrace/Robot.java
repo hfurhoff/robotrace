@@ -21,8 +21,14 @@ class Robot {
     /** The material from which this robot is built. */
     private final Material material;
     
+    private Vector bodyPos = new Vector(0, 0, 0);
+    private Vector headPos = new Vector(0, 0, 0.7);
+    private Vector leftArmPos = new Vector(-0.4, 0, 0.35);
+    private Vector rightArmPos = new Vector(0.4, 0, 0.35);
+    private Vector leftLegPos = new Vector(-0.25, 0, -0.7);
+    private Vector rightLegPos = new Vector(0.25, 0, -0.7);
     
-
+    
     /**
      * Constructs the robot with initial parameters.
      */
@@ -38,6 +44,10 @@ class Robot {
      * Draws this robot (as a {@code stickfigure} if specified).
      */
     public void draw(GL2 gl, GLU glu, GLUT glut, float tAnim) {
+        gl.glPushMatrix();
+    }
+    
+    private void drawBody(){
         
     }
     
