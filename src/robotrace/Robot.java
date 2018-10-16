@@ -21,12 +21,19 @@ class Robot {
     /** The material from which this robot is built. */
     private final Material material;
     
+    private double bodyWidth    = 0.5;
+    private double bodyHeight   = 1.0;
+    private double legSize      = 0.4;
+    private double armSize      = 0.3;
+    private double headSize     = 0.4;
+   
+    
     private Vector bodyPos = new Vector(0, 0, 0);
-    private Vector headPos = new Vector(0, 0, 0.7);
-    private Vector leftArmPos = new Vector(-0.4, 0, 0.35);
-    private Vector rightArmPos = new Vector(0.4, 0, 0.35);
-    private Vector leftLegPos = new Vector(-0.25, 0, -0.7);
-    private Vector rightLegPos = new Vector(0.25, 0, -0.7);
+    private Vector headPos = new Vector(0, 0, (bodyHeight / 2) + (headSize / 2));
+    private Vector leftArmPos = new Vector(-(bodyWidth / 2) - (armSize / 2), 0, (bodyHeight / 2) - (armSize / 2));
+    private Vector rightArmPos = new Vector((bodyWidth / 2) + (armSize / 2), 0, (bodyHeight / 2) - (armSize / 2));
+    private Vector leftLegPos = new Vector(-(bodyWidth / 2) - (legSize / 2), 0, -(bodyHeight / 2) - (legSize / 2));
+    private Vector rightLegPos = new Vector((bodyWidth / 2) + (legSize / 2), 0, -(bodyHeight / 2) - (legSize / 2));
     
     
     /**
