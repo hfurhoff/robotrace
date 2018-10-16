@@ -51,5 +51,15 @@ class Robot {
         
     }
     
+    private void drawHead(){
+        
+    }
     
+    private void drawArm(){
+        
+    }
+    
+    private void drawLeg(){
+        
+    }
 }
