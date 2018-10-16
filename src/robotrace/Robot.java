@@ -51,49 +51,51 @@ class Robot {
      * Draws this robot (as a {@code stickfigure} if specified).
      */
     public void draw(GL2 gl, GLU glu, GLUT glut, float tAnim) {
+        
         gl.glPushMatrix();
-            this.drawBody();
+            this.drawBody(gl, glu, glut);
         gl.glPopMatrix();
         
         gl.glPushMatrix();
             gl.glTranslated(headPos.x, headPos.y, headPos.z);
-            this.drawHead();
+            this.drawHead(gl, glu, glut);
         gl.glPopMatrix();
         
         gl.glPushMatrix();
             gl.glTranslated(leftArmPos.x, leftArmPos.y, leftArmPos.z);
-            this.drawArm();
+            this.drawArm(gl, glu, glut);
         gl.glPopMatrix();
         
         gl.glPushMatrix();
             gl.glTranslated(rightArmPos.x, rightArmPos.y, rightArmPos.z);
-            this.drawArm();
+            this.drawArm(gl, glu, glut);
         gl.glPopMatrix();
         
         gl.glPushMatrix();
             gl.glTranslated(leftLegPos.x, leftLegPos.y, leftLegPos.z);
-            this.drawLeg();
+            this.drawLeg(gl, glu, glut);
         gl.glPopMatrix();
         
         gl.glPushMatrix();
             gl.glTranslated(rightLegPos.x, rightLegPos.y, rightLegPos.z);
-            this.drawLeg();
+            this.drawLeg(gl, glu, glut);
         gl.glPopMatrix();
     }
     
-    private void drawBody(){
+    private void drawBody(GL2 gl, GLU glu, GLUT glut){
+        gl.glScaled(bodyWidth, 1.0, bodyHeight);
+        glut.glutSolidCube(1);
+    }
+    
+    private void drawHead(GL2 gl, GLU glu, GLUT glut){
         
     }
     
-    private void drawHead(){
+    private void drawArm(GL2 gl, GLU glu, GLUT glut){
         
     }
     
-    private void drawArm(){
-        
-    }
-    
-    private void drawLeg(){
+    private void drawLeg(GL2 gl, GLU glu, GLUT glut){
         
     }
 }
