@@ -24,17 +24,16 @@ class Robot {
     private double bodyWidth    = 0.5;
     private double bodyHeight   = 1.0;
     private double bodyDepth    = 0.4;
-    private double legSize      = 0.4;
-    private double armSize      = 0.3;
-    private double headSize     = 0.4;
-
+    private double legSize      = 0.2;
+    private double armSize      = 0.2;
+    private double headSize     = 0.7;
     
     private Vector bodyPos = new Vector(0, 0, 0);
     private Vector headPos = new Vector(0, 0, (bodyHeight / 2) + (headSize / 2));
     private Vector leftArmPos = new Vector(-(bodyWidth / 2) - (armSize / 2), 0, (bodyHeight / 2) - (armSize / 2));
     private Vector rightArmPos = new Vector((bodyWidth / 2) + (armSize / 2), 0, (bodyHeight / 2) - (armSize / 2));
-    private Vector leftLegPos = new Vector(-(bodyWidth / 2) - (legSize / 2), 0, -(bodyHeight / 2) - (legSize / 2));
-    private Vector rightLegPos = new Vector((bodyWidth / 2) + (legSize / 2), 0, -(bodyHeight / 2) - (legSize / 2));
+    private Vector leftLegPos = new Vector(-(bodyWidth / 2) + (legSize / 2), 0, -(bodyHeight / 2) - (legSize / 2));
+    private Vector rightLegPos = new Vector((bodyWidth / 2) - (legSize / 2), 0, -(bodyHeight / 2) - (legSize / 2));
     
     
     /**
@@ -89,14 +88,17 @@ class Robot {
     }
     
     private void drawHead(GL2 gl, GLU glu, GLUT glut){
-        
+        gl.glScaled(headSize, headSize, headSize);
+        glut.glutSolidCube(1);
     }
     
     private void drawArm(GL2 gl, GLU glu, GLUT glut){
-        
+        gl.glScaled(armSize, armSize, armSize);
+        glut.glutSolidCube(1);
     }
     
     private void drawLeg(GL2 gl, GLU glu, GLUT glut){
-        
+        gl.glScaled(legSize, legSize, legSize);
+        glut.glutSolidCube(1);
     }
 }
