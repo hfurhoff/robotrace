@@ -23,6 +23,7 @@ class Robot {
     
     private double bodyWidth    = 0.5;
     private double bodyHeight   = 1.0;
+    private double bodyDepth    = 0.4;
     private double legSize      = 0.4;
     private double armSize      = 0.3;
     private double headSize     = 0.4;
@@ -83,7 +84,7 @@ class Robot {
     }
     
     private void drawBody(GL2 gl, GLU glu, GLUT glut){
-        gl.glScaled(bodyWidth, 1.0, bodyHeight);
+        gl.glScaled(bodyWidth, bodyDepth, bodyHeight);
         glut.glutSolidCube(1);
     }
     
