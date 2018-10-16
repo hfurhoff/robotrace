@@ -45,6 +45,33 @@ class Robot {
      */
     public void draw(GL2 gl, GLU glu, GLUT glut, float tAnim) {
         gl.glPushMatrix();
+            this.drawBody();
+        gl.glPopMatrix();
+        
+        gl.glPushMatrix();
+            gl.glTranslated(headPos.x, headPos.y, headPos.z);
+            this.drawHead();
+        gl.glPopMatrix();
+        
+        gl.glPushMatrix();
+            gl.glTranslated(leftArmPos.x, leftArmPos.y, leftArmPos.z);
+            this.drawArm();
+        gl.glPopMatrix();
+        
+        gl.glPushMatrix();
+            gl.glTranslated(rightArmPos.x, rightArmPos.y, rightArmPos.z);
+            this.drawArm();
+        gl.glPopMatrix();
+        
+        gl.glPushMatrix();
+            gl.glTranslated(leftLegPos.x, leftLegPos.y, leftLegPos.z);
+            this.drawLeg();
+        gl.glPopMatrix();
+        
+        gl.glPushMatrix();
+            gl.glTranslated(rightLegPos.x, rightLegPos.y, rightLegPos.z);
+            this.drawLeg();
+        gl.glPopMatrix();
     }
     
     private void drawBody(){
