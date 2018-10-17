@@ -220,7 +220,7 @@ public class RobotRace extends Base {
         gl.glUseProgram(robotShader.getProgramID()); 
         
         gl.glColor3d(gs.sliderC, gs.sliderD, gs.sliderE);
-        robots[0].draw(gl, glu, glut, 0);
+        robots[0].draw(gl, glu, glut, (float)gs.sliderA * 10);
         
         
         // Draw the race track.
