@@ -27,6 +27,56 @@ abstract class RaceTrack {
      * Draws this track, based on the control points.
      */
     public void draw(GL2 gl, GLU glu, GLUT glut) {
+        double polyPoints = 100;    // Number of polygons on sides (boundaries) of race track 
+        double toggleSign = 1;      // Toggles points between positive and negative z-plane
+        
+        // Drawing the OUTER FRAME of the race track
+        gl.glBegin(GL_TRIANGLE_STRIP);
+        for(int i=0;i<=polyPoints+1;i++){
+            gl.glColor3d(0.8, 1, 0.9);      // Define color
+            
+            // Calculate normal vector
+            Vector normal = new Vector(-getTangent(i / polyPoints).y, getTangent(i / polyPoints).x, 0);
+            
+            // Pass next triangle strip point on to glVertex, depending on defined number of polygons (polyPoints)
+            gl.glVertex3d(getPoint(i / polyPoints).x + (normal.normalized().x * 2 * laneWidth),
+                            getPoint(i / polyPoints).y + (normal.normalized().y * 2 * laneWidth), toggleSign); 
+            
+            toggleSign = -toggleSign;   // Toggle z-plane
+        }
+        gl.glEnd();
+        
+        // Drawing the INNER FRAME of the race track
+        gl.glBegin(GL_TRIANGLE_STRIP);
+        for(int i=0;i<=polyPoints+1;i++){
+            gl.glColor3d(0.8, 1, 0.9);      // Define color
+            
+            // Calculate normal vector
+            Vector normal = new Vector(-getTangent(i / polyPoints).y, getTangent(i / polyPoints).x, 0);
+
+            // Pass next triangle strip point on to glVertex, depending on defined number of polygons (polyPoints)
+            gl.glVertex3d(getPoint(i / polyPoints).x - (normal.normalized().x * 2 * laneWidth),
+                            getPoint(i / polyPoints).y - (normal.normalized().y * 2 * laneWidth),toggleSign);
+
+            toggleSign = -toggleSign;   // Toggle z-plane
+        }
+        gl.glEnd();
+        
+        // Drawing the SURFACE of the race track
+        gl.glBegin(GL_TRIANGLE_STRIP);
+        for(int i=0;i<=polyPoints+1;i++){
+            gl.glColor3d(0.9, 1, 0.9);      // Define color
+            
+            // Calculate normal vector
+            Vector normal = new Vector(-getTangent(i / polyPoints).y, getTangent(i / polyPoints).x, 0);
+            
+            // Pass next triangle strip point on to glVertex, depending on defined number of polygons (polyPoints)
+            gl.glVertex3d(getPoint(i / polyPoints).x - (normal.normalized().x * 2 * laneWidth * toggleSign), 
+                            getPoint(i / polyPoints).y - (normal.normalized().y * 2 * laneWidth * toggleSign),1);
+           
+            toggleSign = -toggleSign;   // Toggle z-plane
+        }
+        gl.glEnd();
         
     }
     
