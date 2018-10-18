@@ -9,6 +9,8 @@ import static com.jogamp.opengl.fixedfunc.GLLightingFunc.*;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.toDegrees;
+import static java.nio.FloatBuffer.*;
+import static robotrace.Material.*;
 
 /**
 * Represents a Robot, to be implemented according to the Assignments.
@@ -56,8 +58,11 @@ class Robot {
      * Draws this robot (as a {@code stickfigure} if specified).
      */
     public void draw(GL2 gl, GLU glu, GLUT glut, float tAnim) {
-        
         double angle = maxAngle * cos(tAnim);
+        
+        gl.glMaterialfv(GL_FRONT, GL_DIFFUSE, wrap(this.material.diffuse));
+        gl.glMaterialfv(GL_FRONT, GL_SPECULAR, wrap(this.material.specular));
+        gl.glMaterialf(GL_FRONT, GL_SHININESS, this.material.shininess);
         
         gl.glPushMatrix();
             this.drawBody(gl, glu, glut);
