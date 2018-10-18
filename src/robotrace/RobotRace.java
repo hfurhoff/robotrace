@@ -2,6 +2,7 @@ package robotrace;
 
 import static com.jogamp.opengl.GL2.*;
 import static java.lang.Math.*;
+import java.util.Calendar;
 import static robotrace.ShaderPrograms.*;
 import static robotrace.Textures.*;
 
@@ -219,22 +220,22 @@ public class RobotRace extends Base {
         // Draw the (first) robot.
         gl.glUseProgram(robotShader.getProgramID()); 
         
-
-        robots[0].draw(gl, glu, glut, (float)gs.sliderA * (float) 3.14);
+        float t = (float) toRadians(System.nanoTime() * 0.000001);
+        robots[0].draw(gl, glu, glut, t);
 
         gl.glPushMatrix();
         gl.glTranslated(1, 0, 0);
-        robots[1].draw(gl, glu, glut, (float)gs.sliderB * (float) 3.14);
+        robots[1].draw(gl, glu, glut, t);
         gl.glPopMatrix();
 
         gl.glPushMatrix();
         gl.glTranslated(2, 0, 0);
-        robots[2].draw(gl, glu, glut, (float)gs.sliderC * (float) 3.14);
+        robots[2].draw(gl, glu, glut, t);
         gl.glPopMatrix();
 
         gl.glPushMatrix();
         gl.glTranslated(3, 0, 0);
-        robots[3].draw(gl, glu, glut, (float)gs.sliderD * (float) 3.14);
+        robots[3].draw(gl, glu, glut, t);
         gl.glPopMatrix();
         
         

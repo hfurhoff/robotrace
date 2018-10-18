@@ -7,9 +7,11 @@ import static com.jogamp.opengl.GL.*;
 import static com.jogamp.opengl.GL2ES3.GL_QUADS;
 import static com.jogamp.opengl.fixedfunc.GLLightingFunc.*;
 import static java.lang.Math.cos;
+import static java.lang.Math.max;
 import static java.lang.Math.sin;
 import static java.lang.Math.toDegrees;
 import static java.nio.FloatBuffer.*;
+import java.util.Random;
 import static robotrace.Material.*;
 
 /**
@@ -41,6 +43,7 @@ class Robot {
     private Vector rightArmPos = new Vector((bodyWidth / 2) + (armSize / 2), 0, (bodyHeight / 2) - (armSize / 2));
     private Vector leftLegPos = new Vector(-(bodyWidth / 2) + (legSize / 2), 0, -(bodyHeight / 2) - (legSize / 2));
     private Vector rightLegPos = new Vector((bodyWidth / 2) - (legSize / 2), 0, -(bodyHeight / 2) - (legSize / 2));
+    private final float pace;
     
     
     /**
@@ -50,7 +53,7 @@ class Robot {
             
     ) {
         this.material = material;
-
+        this.pace = (float) max(new Random().nextFloat(), 0.1);
         
     }
 
@@ -58,7 +61,7 @@ class Robot {
      * Draws this robot (as a {@code stickfigure} if specified).
      */
     public void draw(GL2 gl, GLU glu, GLUT glut, float tAnim) {
-        double angle = maxAngle * cos(tAnim);
+        double angle = maxAngle * cos(tAnim * pace);
         
         gl.glMaterialfv(GL_FRONT, GL_DIFFUSE, wrap(this.material.diffuse));
         gl.glMaterialfv(GL_FRONT, GL_SPECULAR, wrap(this.material.specular));
