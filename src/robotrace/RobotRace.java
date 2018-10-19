@@ -179,7 +179,13 @@ public class RobotRace extends Base {
                
         // Update the view according to the camera mode and robot of interest.
         // For camera modes 1 to 4, determine which robot to focus on.
-        camera.update(gs, robots[0]);
+        int lastRobot = 0;
+        for(int i = 1; i < robots.length; i++){
+            if(robots[lastRobot].pace > robots[i].pace){
+                lastRobot = i;
+            }
+        }
+        camera.update(gs, robots[lastRobot]);
         glu.gluLookAt(camera.eye.x(),    camera.eye.y(),    camera.eye.z(),
                       camera.center.x(), camera.center.y(), camera.center.z(),
                       camera.up.x(),     camera.up.y(),     camera.up.z());
@@ -268,15 +274,12 @@ public class RobotRace extends Base {
             gl.glVertex3d(end.x, end.y, end.z);
         gl.glEnd();
         
-        gl.glPointSize((float)10.0);
         gl.glColor3d(1.0, 1.0, 0.0);
-        gl.glBegin(GL_POINTS);
-            gl.glVertex3d(start.x, start.y, start.z);
-        gl.glEnd();
+        glut.glutSolidSphere(0.1, 10, 10);
         
         Vector v = end.subtract(start);
         Vector vn = v.normalized();
-        double size = 0.1 * v.length();
+        double size = 0.2 * v.length();
         gl.glColor3d(color.x, color.y, color.z);
         Vector z = new Vector(0, 0, 1).normalized();
         Vector cross;

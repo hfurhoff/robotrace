@@ -34,12 +34,12 @@ class Robot {
     private double bodyDepth    = 0.4;
     private double legSize      = 0.2;
     private double armSize      = 0.2;
-    private double headSize     = 0.7;
+    double headSize     = 0.7;
     
     private double maxAngle     = 30;
     
     private Vector bodyPos = new Vector(0, 0, 1);
-    private Vector headPos = new Vector(0, 0, (bodyHeight / 2) + (headSize / 2) + 1);
+    Vector headPos = new Vector(0, 0, (bodyHeight / 2) + (headSize / 2) + 1);
     private Vector leftArmPos = new Vector(-(bodyWidth / 2) - (armSize / 2), 0, (bodyHeight / 2) - (armSize / 2) + 1);
     private Vector rightArmPos = new Vector((bodyWidth / 2) + (armSize / 2), 0, (bodyHeight / 2) - (armSize / 2) + 1);
     private Vector leftLegPos = new Vector(-(bodyWidth / 2) + (legSize / 2), 0, -(bodyHeight / 2) - (legSize / 2) + 1);
