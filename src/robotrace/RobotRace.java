@@ -220,23 +220,17 @@ public class RobotRace extends Base {
         // Draw the (first) robot.
         gl.glUseProgram(robotShader.getProgramID()); 
         
-        float t = (float) toRadians(System.nanoTime() * 0.000001);
-        robots[0].draw(gl, glu, glut, t);
+        robots[0].position.x = -4;
+        robots[0].draw(gl, glu, glut, gs.tAnim);
 
-        gl.glPushMatrix();
-        gl.glTranslated(1, 0, 0);
-        robots[1].draw(gl, glu, glut, t);
-        gl.glPopMatrix();
+        robots[1].position.x = -2;
+        robots[1].draw(gl, glu, glut, gs.tAnim);
 
-        gl.glPushMatrix();
-        gl.glTranslated(2, 0, 0);
-        robots[2].draw(gl, glu, glut, t);
-        gl.glPopMatrix();
+        robots[2].position.x = 2;
+        robots[2].draw(gl, glu, glut, gs.tAnim);
 
-        gl.glPushMatrix();
-        gl.glTranslated(3, 0, 0);
-        robots[3].draw(gl, glu, glut, t);
-        gl.glPopMatrix();
+        robots[3].position.x = 4;
+        robots[3].draw(gl, glu, glut, gs.tAnim);
         
         
         // Draw the race track.

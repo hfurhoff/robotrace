@@ -53,7 +53,7 @@ class Robot {
             
     ) {
         this.material = material;
-        this.pace = (float) max(new Random().nextFloat(), 0.1);
+        this.pace = (float) max(new Random().nextFloat(), 0.1) * 10;
         
     }
 
@@ -62,38 +62,40 @@ class Robot {
      */
     public void draw(GL2 gl, GLU glu, GLUT glut, float tAnim) {
         double angle = maxAngle * cos(tAnim * pace);
-        
-        gl.glMaterialfv(GL_FRONT, GL_DIFFUSE, wrap(this.material.diffuse));
-        gl.glMaterialfv(GL_FRONT, GL_SPECULAR, wrap(this.material.specular));
-        gl.glMaterialf(GL_FRONT, GL_SHININESS, this.material.shininess);
-        
         gl.glPushMatrix();
-            this.drawBody(gl, glu, glut);
-        gl.glPopMatrix();
-        
-        gl.glPushMatrix();
-            gl.glTranslated(headPos.x, headPos.y, headPos.z);
-            this.drawHead(gl, glu, glut, angle);
-        gl.glPopMatrix();
-        
-        gl.glPushMatrix();
-            gl.glTranslated(leftArmPos.x, leftArmPos.y, leftArmPos.z);
-            this.drawArm(gl, glu, glut, angle);
-        gl.glPopMatrix();
-        
-        gl.glPushMatrix();
-            gl.glTranslated(rightArmPos.x, rightArmPos.y, rightArmPos.z);
-            this.drawArm(gl, glu, glut, -angle);
-        gl.glPopMatrix();
-        
-        gl.glPushMatrix();
-            gl.glTranslated(leftLegPos.x, leftLegPos.y, leftLegPos.z);
-            this.drawLeg(gl, glu, glut, -angle);
-        gl.glPopMatrix();
-        
-        gl.glPushMatrix();
-            gl.glTranslated(rightLegPos.x, rightLegPos.y, rightLegPos.z);
-            this.drawLeg(gl, glu, glut, angle);
+            gl.glTranslated(this.position.x, this.position.y, this.position.z);
+            gl.glMaterialfv(GL_FRONT, GL_DIFFUSE, wrap(this.material.diffuse));
+            gl.glMaterialfv(GL_FRONT, GL_SPECULAR, wrap(this.material.specular));
+            gl.glMaterialf(GL_FRONT, GL_SHININESS, this.material.shininess);
+
+            gl.glPushMatrix();
+                this.drawBody(gl, glu, glut);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+                gl.glTranslated(headPos.x, headPos.y, headPos.z);
+                this.drawHead(gl, glu, glut, angle);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+                gl.glTranslated(leftArmPos.x, leftArmPos.y, leftArmPos.z);
+                this.drawArm(gl, glu, glut, angle);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+                gl.glTranslated(rightArmPos.x, rightArmPos.y, rightArmPos.z);
+                this.drawArm(gl, glu, glut, -angle);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+                gl.glTranslated(leftLegPos.x, leftLegPos.y, leftLegPos.z);
+                this.drawLeg(gl, glu, glut, -angle);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+                gl.glTranslated(rightLegPos.x, rightLegPos.y, rightLegPos.z);
+                this.drawLeg(gl, glu, glut, angle);
+            gl.glPopMatrix();
         gl.glPopMatrix();
     }
     
