@@ -87,7 +87,7 @@ abstract class RaceTrack {
     public Vector getLanePoint(int lane, double t){
         Vector normal = new Vector(-getTangent(t).y, getTangent(t).x, 0);
         return new Vector(getPoint(t).x - (normal.normalized().x * 1.5 * laneWidth) + (normal.normalized().x * lane * laneWidth), 
-                getPoint(t).y - (normal.normalized().y * 1.5 * laneWidth) + (normal.normalized().y * lane * laneWidth),2);
+                getPoint(t).y - (normal.normalized().y * 1.5 * laneWidth) + (normal.normalized().y * lane * laneWidth),1);
     }
     
     /**

@@ -43,7 +43,7 @@ class Robot {
     private Vector rightArmPos = new Vector((bodyWidth / 2) + (armSize / 2), 0, (bodyHeight / 2) - (armSize / 2) + 1);
     private Vector leftLegPos = new Vector(-(bodyWidth / 2) + (legSize / 2), 0, -(bodyHeight / 2) - (legSize / 2) + 1);
     private Vector rightLegPos = new Vector((bodyWidth / 2) - (legSize / 2), 0, -(bodyHeight / 2) - (legSize / 2) + 1);
-    private final float pace;
+    final float pace;
     
     
     /**
@@ -53,7 +53,7 @@ class Robot {
             
     ) {
         this.material = material;
-        this.pace = (float) max(new Random().nextFloat(), 0.1) * 10;
+        this.pace = (float) max(new Random().nextFloat(), 0.5);
         
     }
 
@@ -61,7 +61,7 @@ class Robot {
      * Draws this robot (as a {@code stickfigure} if specified).
      */
     public void draw(GL2 gl, GLU glu, GLUT glut, float tAnim) {
-        double angle = maxAngle * cos(tAnim * pace);
+        double angle = maxAngle * cos(tAnim * pace * 10);
         gl.glPushMatrix();
             gl.glTranslated(this.position.x, this.position.y, this.position.z);
             gl.glMaterialfv(GL_FRONT, GL_DIFFUSE, wrap(this.material.diffuse));
