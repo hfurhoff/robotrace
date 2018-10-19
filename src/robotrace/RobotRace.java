@@ -274,15 +274,12 @@ public class RobotRace extends Base {
             gl.glVertex3d(end.x, end.y, end.z);
         gl.glEnd();
         
-        gl.glPointSize((float)10.0);
         gl.glColor3d(1.0, 1.0, 0.0);
-        gl.glBegin(GL_POINTS);
-            gl.glVertex3d(start.x, start.y, start.z);
-        gl.glEnd();
+        glut.glutSolidSphere(0.1, 10, 10);
         
         Vector v = end.subtract(start);
         Vector vn = v.normalized();
-        double size = 0.1 * v.length();
+        double size = 0.2 * v.length();
         gl.glColor3d(color.x, color.y, color.z);
         Vector z = new Vector(0, 0, 1).normalized();
         Vector cross;
