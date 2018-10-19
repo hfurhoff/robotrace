@@ -220,7 +220,6 @@ public class RobotRace extends Base {
         // Draw the (first) robot.
         gl.glUseProgram(robotShader.getProgramID()); 
         
-        
         robots[0].position = raceTracks[gs.trackNr].getLanePoint(0, (double) gs.tAnim);
         robots[0].draw(gl, glu, glut, gs.tAnim);
 
