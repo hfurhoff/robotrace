@@ -38,7 +38,7 @@ class Robot {
     private double maxAngle     = 30;
     
     private Vector bodyPos = new Vector(0, 0, 1);
-    private Vector headPos = new Vector(0, 0, (bodyHeight / 2) + (headSize / 2));
+    private Vector headPos = new Vector(0, 0, (bodyHeight / 2) + (headSize / 2) + 1);
     private Vector leftArmPos = new Vector(-(bodyWidth / 2) - (armSize / 2), 0, (bodyHeight / 2) - (armSize / 2) + 1);
     private Vector rightArmPos = new Vector((bodyWidth / 2) + (armSize / 2), 0, (bodyHeight / 2) - (armSize / 2) + 1);
     private Vector leftLegPos = new Vector(-(bodyWidth / 2) + (legSize / 2), 0, -(bodyHeight / 2) - (legSize / 2) + 1);
@@ -69,6 +69,7 @@ class Robot {
             gl.glMaterialf(GL_FRONT, GL_SHININESS, this.material.shininess);
 
             gl.glPushMatrix();
+                gl.glTranslated(bodyPos.x, bodyPos.y, bodyPos.z);
                 this.drawBody(gl, glu, glut);
             gl.glPopMatrix();
 
