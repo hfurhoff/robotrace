@@ -98,9 +98,12 @@ abstract class RaceTrack {
      * Use this method to find the orientation of a robot on the track.
      */
     public Vector getLaneTangent(int lane, double t){
+        // Calculate normal vector
+        Vector normal = new Vector(-getTangent(t).y, getTangent(t).x, 0);
         
-        return getTangent(t);
-
+        // Return tangent according to lane number (0,1,2,3)
+        return new Vector(getTangent(t).x - (normal.normalized().x * 1.5 * laneWidth) + (normal.normalized().x * lane * laneWidth), 
+                getTangent(t).y - (normal.normalized().y * 1.5 * laneWidth) + (normal.normalized().y * lane * laneWidth),1);
     }
     
     
