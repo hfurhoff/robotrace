@@ -41,11 +41,12 @@ class Camera {
      */
     private void setDefaultMode(GlobalState gs) {
         double dist_xy_proj = cos(gs.phi) * gs.vDist;
-        
+        center.x = 0;
+        center.y = 0;
+        center.z = 0;
         eye.x = cos(gs.theta) * dist_xy_proj;
         eye.y = sin(gs.theta) * dist_xy_proj;
         eye.z = gs.vDist * sin(gs.phi);
-         
     }
 
     /**
@@ -53,6 +54,14 @@ class Camera {
      * The camera should view from the perspective of the robot.
      */
     private void setFirstPersonMode(GlobalState gs, Robot focus) {
-
+        Vector dir = focus.direction.normalized();
+        
+        eye.x = focus.headPos.x + focus.position.x;
+        eye.y = focus.headPos.y + focus.position.y;
+        eye.z = focus.headPos.z + focus.headSize + focus.position.z;
+        
+        center.x = eye.x + dir.x;
+        center.y = eye.y + dir.y;
+        center.z = eye.z + dir.z;
     }
 }
