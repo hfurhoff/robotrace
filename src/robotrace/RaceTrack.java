@@ -32,14 +32,15 @@ abstract class RaceTrack {
      */
     public void draw(GL2 gl, GLU glu, GLUT glut, Material material) {
 
-        double polyPoints = 100;    // Number of polygons on sides (boundaries) of race track 
+        double polyPoints = laneWidth * 80;    // Determines number of polygons on race track (& scales texture!)
         gl.glPushMatrix();
         gl.glMaterialfv(GL_FRONT, GL_DIFFUSE, wrap(material.diffuse));
         gl.glMaterialfv(GL_FRONT, GL_SPECULAR, wrap(material.specular));
         gl.glMaterialf(GL_FRONT, GL_SHININESS, material.shininess);
         
-        Textures.brick.bind(gl);
+        Textures.brick512.bind(gl);
         // Drawing the OUTER FRAME of the race track
+        gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         gl.glBegin(GL_TRIANGLE_STRIP);
         for(int i=0;i<=polyPoints+1;i++){
             //gl.glColor3d(0.8, 1, 0.9);      // Define color
@@ -61,6 +62,7 @@ abstract class RaceTrack {
         gl.glEnd();
         
         // Drawing the INNER FRAME of the race track
+        gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         gl.glBegin(GL_TRIANGLE_STRIP);
         for(int i=0;i<=polyPoints+1;i++){
             //gl.glColor3d(0.8, 1, 0.9);      // Define color
@@ -81,30 +83,33 @@ abstract class RaceTrack {
         }
         gl.glEnd();
         
-        
-        Textures.track.bind(gl);
         // Drawing the SURFACE of the race track
+        Textures.track512.bind(gl);
+        gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         gl.glBegin(GL_TRIANGLE_STRIP);
-        for(int i=0;i<=polyPoints+1;i++){
+        
+        for(float i=0;i<=polyPoints+1.22;i+=1.22){
             //gl.glColor3d(0.9, 1, 0.9);      // Define color
             
             // Calculate normal vector
             Vector normal = new Vector(getTangent(i / polyPoints).y, -getTangent(i / polyPoints).x, 0);
             gl.glNormal3d(normal.x, normal.y, normal.z);
             
-            gl.glMultiTexCoord2d(GL_TEXTURE0, 0, (i%8.88) / 8.88);
+            gl.glMultiTexCoord2d(GL_TEXTURE0, 0, i / (laneWidth*8));
             
             // Pass next triangle strip point on to glVertex, depending on defined number of polygons (polyPoints)
             gl.glVertex3d(getPoint(i / polyPoints).x - (normal.normalized().x * 2 * laneWidth), 
                             getPoint(i / polyPoints).y - (normal.normalized().y * 2 * laneWidth),1);
             
-            gl.glMultiTexCoord2d(GL_TEXTURE0, 1, (i%8.88) / 8.88);
+            gl.glMultiTexCoord2d(GL_TEXTURE0, 1, i / (laneWidth*8));
             
             // Pass next triangle strip point on to glVertex, depending on defined number of polygons (polyPoints)
             gl.glVertex3d(getPoint(i / polyPoints).x + (normal.normalized().x * 2 * laneWidth), 
                             getPoint(i / polyPoints).y + (normal.normalized().y * 2 * laneWidth),1);
         }
         gl.glEnd();
+        
+        
         gl.glPopMatrix();
         
     }
