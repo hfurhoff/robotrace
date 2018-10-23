@@ -9,7 +9,9 @@ import static com.jogamp.opengl.fixedfunc.GLLightingFunc.*;
 import static java.lang.Math.acos;
 import static java.lang.Math.cos;
 import static java.lang.Math.max;
+import static java.lang.Math.pow;
 import static java.lang.Math.sin;
+import static java.lang.Math.sqrt;
 import static java.lang.Math.toDegrees;
 import static java.nio.FloatBuffer.*;
 import java.util.Random;
@@ -22,6 +24,8 @@ class Robot {
     
     /** The position of the robot. */
     public Vector position = new Vector(0, 0, 0);
+    public Vector firstPos = new Vector(0, 0, 0);
+    public boolean firstDrawing = true;
     
     /** The direction in which the robot is running. */
     public Vector direction = new Vector(1, 0, 0);
@@ -62,6 +66,20 @@ class Robot {
      * Draws this robot (as a {@code stickfigure} if specified).
      */
     public void draw(GL2 gl, GLU glu, GLUT glut, float tAnim) {
+        if(firstDrawing){
+            firstPos.x = position.x;
+            firstPos.y = position.y;
+            firstPos.z = position.z;
+            firstDrawing = false;
+        }
+        gl.glPushMatrix();
+        gl.glTranslated(firstPos.x, firstPos.y, firstPos.z);
+        gl.glColor3d(0, 0, 0);
+        glut.glutSolidCube(1);
+        gl.glPopMatrix();
+        if(sqrt(pow(position.x - firstPos.x, 2) + pow(position.y - firstPos.y, 2)) < 1){
+           position.z += 1 - sqrt(pow(position.x - firstPos.x, 2) + pow(position.y - firstPos.y, 2)); 
+        }
         double angle = maxAngle * cos(tAnim * pace * 10);
         double robotAngle = toDegrees(acos(Vector.Y.normalized().dot(this.direction.normalized()))) % 180;
         if(this.direction.x < 0) robotAngle = 180 - robotAngle;
