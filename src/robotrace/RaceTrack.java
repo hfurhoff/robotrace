@@ -140,7 +140,21 @@ abstract class RaceTrack {
                 getTangent(t).y - (normal.normalized().y * 1.5 * laneWidth) + (normal.normalized().y * lane * laneWidth),1);
     }
     
+    public Vector getCubicBezierPnt(double t, Vector P0, Vector P1, Vector P2, Vector P3){
+        //t = t % 1;  // Pushing t in to the correct range [0,1]
+                          
+        // P(t) = (1 - t)^3 * P0 + 3t(1-t)^2 * P1 + 3t^2 (1-t) * P2 + t^3 * P3
+        return P0.scale(Math.pow(1 - t, 3)).add(P1.scale(3 * t * Math.pow(1 - t, 2)))
+                .add(P2.scale(3 * Math.pow(t, 2) * (1 - t))).add(P3.scale(Math.pow(t, 3)));
+    }
     
+    public Vector getCubicBezierTng(double t, Vector P0, Vector P1, Vector P2, Vector P3){
+        //t = t % 1;  // Pushing t in to the correct range [0,1]
+           
+        // P'(t) =  -3(1-t)^2 * P0 + 3(1-t)^2 * P1 - 6t(1-t) * P1 - 3t^2 * P2 + 6t(1-t) * P2 + 3t^2 * P3
+        return P0.scale(-3 * Math.pow(1 - t, 2)).add(P1.scale(3 * Math.pow(1 - t, 2) - 6 * t * (1 - t)))
+            .add(P2.scale(-3 * Math.pow(t, 2) + 6 * t * (1 - t))).add(P3.scale(3 * Math.pow(t, 2)));
+    }
     
     // Returns a point on the test track at 0 <= t < 1.
     protected abstract Vector getPoint(double t);

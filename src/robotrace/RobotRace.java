@@ -106,7 +106,7 @@ public class RobotRace extends Base {
         camera = new Camera();
         
         // Initialize the race tracks
-        raceTracks = new RaceTrack[3];
+        raceTracks = new RaceTrack[2];
         
         // Track 1: Parametric Oval
         raceTracks[0] = new ParametricTrack();
@@ -116,50 +116,86 @@ public class RobotRace extends Base {
         raceTracks[1] = new BezierTrack(
                 
             new Vector[] {
-                new Vector(-3, -16, 1),
-                new Vector(8, -17, 1),
-                new Vector(14, -14.6, 1),
-                new Vector(15.5, -10.5, 1),
-
-                new Vector(15.5, -10.5, 1), 
-                new Vector(17, -7, 1),
-                new Vector(15.5, -4, 1),
-                new Vector(14, -0.5, 1),
-
-                new Vector(14, -0.5, 1), 
-                new Vector(12.5, 2, 1),
-                new Vector(11.5, 5, 1),
-                new Vector(12, 8.5, 1),
-
-                new Vector(12, 8.5, 1),
-                new Vector(13.5, 12, 1),
-                new Vector(12.5, 14.5, 1),
-                new Vector(3.5, 17.5, 1),
-
-                new Vector(3.5, 17.5, 1),
-                new Vector(-1.5, 19, 1),
-                new Vector(-4.5, 17,1),
-                new Vector(-7.5, 15, 1),
-
-                new Vector(-7.5, 15, 1),
-                new Vector(-11,11,1),
-                new Vector(-12, 7.5, 1),
-                new Vector(-10,5, 1),
-
-                new Vector(-10,5, 1),
-                new Vector(-7, 2.5, 1),
-                new Vector(-7.5, -2, 1),
-                new Vector(-11.5,-4.5,1),
-
-                new Vector(-11.5,-4.5,1),
-                new Vector(-14,-6,1),
-                new Vector(-16,-8,1),
-                new Vector(-14,-12,1),
-
-                new Vector(-14,-12,1),
-                new Vector(-12,-16,1),
-                new Vector(-6, -17, 1),
-                new Vector(-3, -16, 1)
+                new Vector(-16, 9, 1),
+                new Vector(-15.5, 13.5, 1),
+                new Vector(-13.5, 15.5, 1),
+                new Vector(-9, 16, 1),
+                
+                new Vector(-9, 16, 1),
+                new Vector(-2, 17, 1),
+                new Vector(2, 17, 1),
+                new Vector(9, 16, 1),
+                
+                new Vector(9, 16, 1),
+                new Vector(13.5, 15.5, 1),
+                new Vector(15.5, 13.5, 1),
+                new Vector(16, 9, 1),
+                
+                new Vector(16, 9, 1),
+                new Vector(17, 2, 1),
+                new Vector(17, -2, 1),
+                new Vector(16, -9, 1),
+                
+                new Vector(16, -9, 1),
+                new Vector(15.5, -13.5, 1),
+                new Vector(13.5, -15.5, 1),
+                new Vector(9, -16, 1),
+                
+                new Vector(9, -16, 1),
+                new Vector(2, -17, 1),
+                new Vector(-2, -17, 1),
+                new Vector(-9, -16, 1),
+                
+                new Vector(-9, -16, 1),
+                new Vector(-13.5, -15.5, 1),
+                new Vector(-15.5, -13.5, 1),
+                new Vector(-16, -9, 1),
+                
+                new Vector(-16, -9, 1),
+                new Vector(-17, -2, 1),
+                new Vector(-17, 2, 1),
+                new Vector(-16, 9, 1)
+/*              
+                new Vector(-17, 9, 1),
+                new Vector(-15.5, 13.5, 1),
+                new Vector(-13.5, 15.5, 1),
+                new Vector(-9, 17, 1),
+                
+                new Vector(-9, 17, 1),
+                new Vector(-2, 18, 1),
+                new Vector(2, 18, 1),
+                new Vector(9, 17, 1),
+                
+                new Vector(9, 17, 1),
+                new Vector(13.5, 15.5, 1),
+                new Vector(15.5, 13.5, 1),
+                new Vector(17, 9, 1),
+                
+                new Vector(17, 9, 1),
+                new Vector(18, 2, 1),
+                new Vector(18, -2, 1),
+                new Vector(17, -9, 1),
+                
+                new Vector(17, -9, 1),
+                new Vector(15.5, -13.5, 1),
+                new Vector(13.5, -15.5, 1),
+                new Vector(9, -17, 1),
+                
+                new Vector(9, -17, 1),
+                new Vector(2, -18, 1),
+                new Vector(-2, -18, 1),
+                new Vector(-9, -17, 1),
+                
+                new Vector(-9, -17, 1),
+                new Vector(-13.5, -15.5, 1),
+                new Vector(-15.5, -13.5, 1),
+                new Vector(-17, -9, 1),
+                
+                new Vector(-17, -9, 1),
+                new Vector(-18, -2, 1),
+                new Vector(-18, 2, 1),
+                new Vector(-17, 9, 1)
+*/
             }
         );
         
