@@ -13,9 +13,12 @@ import static com.jogamp.opengl.fixedfunc.GLLightingFunc.GL_DIFFUSE;
 import static com.jogamp.opengl.fixedfunc.GLLightingFunc.GL_SHININESS;
 import static com.jogamp.opengl.fixedfunc.GLLightingFunc.GL_SPECULAR;
 import com.jogamp.opengl.glu.GLU;
+import static java.lang.Math.abs;
 import static java.lang.Math.cos;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
 import static java.nio.FloatBuffer.wrap;
 
 /**
@@ -23,7 +26,7 @@ import static java.nio.FloatBuffer.wrap;
  */
 class Terrain {
 
-    private final int pointsPerSide = 20;
+    private final int pointsPerSide = 40;
     private double size = 40;
     
     public Terrain() {
@@ -45,7 +48,9 @@ class Terrain {
             gl.glBegin(GL_TRIANGLE_STRIP);
             for(int j = 0; j <= pointsPerSide; j++){
                 p.y = -(size/2) + j*interval;
+                
                 p.z = 0.6 * cos(0.3 * p.x + 0.2 * p.y) + 0.4 * cos(p.x - 0.5 * p.y);
+                
                 p.z = this.color(gl, p.z);
                 pp.x = -p.y;
                 pp.y = p.x;
@@ -55,6 +60,7 @@ class Terrain {
                 gl.glVertex3d(p.x, p.y, p.z);
                 
                 p.z = 0.6 * cos(0.3 * (p.x - interval) + 0.2 * p.y) + 0.4 * cos((p.x - interval) - 0.5 * p.y);
+
                 p.z = this.color(gl, p.z);
                 pp.x = -p.y;
                 pp.y = p.x;
@@ -65,6 +71,16 @@ class Terrain {
             }
             gl.glEnd();
         }
+
+        for(int i = 1; i <= pointsPerSide; i++){
+            p.x = -(size/2) + i*interval;
+            for(int j = 0; j <= pointsPerSide; j++){
+                p.y = -(size/2) + j*interval;
+                p.z = 0.6 * cos(0.3 * p.x + 0.2 * p.y) + 0.4 * cos(p.x - 0.5 * p.y);
+                if(p.z > 0.9 && abs(p.x) < 5 && abs(p.y) < 5) this.addTree(gl, glut, p);
+            }
+        }
+
         
         gl.glEnable(GL_BLEND);
         gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -99,5 +115,21 @@ class Terrain {
         }
         gl.glColor3f(c[0], c[1], c[2]);
         return z;
+    }
+
+    private void addTree(GL2 gl, GLUT glut, Vector p) {
+        gl.glPushMatrix();
+        gl.glTranslated(p.x, p.y, p.z);
+        gl.glColor3d(0.64, 0.32, 0);
+        glut.glutSolidCylinder(0.25, 1, 10, 10);
+        gl.glColor3d(0, 0.64, 0);
+        gl.glTranslated(0, 0, 1);
+        glut.glutSolidCone(1, 1, 10, 10);
+        gl.glTranslated(0, 0, 0.5);
+        glut.glutSolidCone(0.75, 0.5, 10, 10);
+        gl.glTranslated(0, 0, 0.25);
+        glut.glutSolidCone(0.5, 0.25, 10, 10);
+        gl.glPopMatrix();
+        
     }
 }
