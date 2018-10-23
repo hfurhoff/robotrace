@@ -65,18 +65,20 @@ class Robot {
     /**
      * Draws this robot (as a {@code stickfigure} if specified).
      */
-    public void draw(GL2 gl, GLU glu, GLUT glut, float tAnim) {
+    public void draw(GL2 gl, GLU glu, GLUT glut, float tAnim, boolean drawObstacles) {
         if(firstDrawing){
             firstPos.x = position.x;
             firstPos.y = position.y;
             firstPos.z = position.z;
             firstDrawing = false;
         }
-        gl.glPushMatrix();
-        gl.glTranslated(firstPos.x, firstPos.y, firstPos.z);
-        gl.glColor3d(0, 0, 0);
-        glut.glutSolidCube(1);
-        gl.glPopMatrix();
+        if(drawObstacles){
+            gl.glPushMatrix();
+            gl.glTranslated(firstPos.x, firstPos.y, firstPos.z);
+            gl.glColor3d(0, 0, 0);
+            glut.glutSolidCube(1);
+            gl.glPopMatrix();
+        }
         if(sqrt(pow(position.x - firstPos.x, 2) + pow(position.y - firstPos.y, 2)) < 1){
            position.z += 1 - sqrt(pow(position.x - firstPos.x, 2) + pow(position.y - firstPos.y, 2)); 
         }
